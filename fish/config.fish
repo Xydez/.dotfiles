@@ -6,5 +6,6 @@ if status is-interactive
     abbr --add gr 'git restore --staged'
     abbr --add gc 'git commit'
     abbr --add gco 'git checkout'
+    abbr --add gp 'git push'
 end
 
