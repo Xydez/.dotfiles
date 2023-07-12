@@ -2,7 +2,7 @@ return function()
     local lsp = require("lsp-zero").preset({})
 
     lsp.ensure_installed({
-        --"sumneko_lua",
+        "lua_ls",
         "rust_analyzer"
     })
 

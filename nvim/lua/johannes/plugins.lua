@@ -1,4 +1,4 @@
-local config_path = "johannes.plugins.config."
+local config_path = "johannes.config."
 
 return {
     {
@@ -10,6 +10,8 @@ return {
             vim.cmd.colorscheme("horizontransparent")
         end,
     },
+
+    -- TODO: null-ls
 
     -- Treesitter
     {
@@ -60,11 +62,12 @@ return {
     },
 
     -- nvim-tree
-    --{
-    --    "nvim-tree/nvim-tree.lua",
-    --    lazy = false,
-    --    --dependencies = { "nvim-tree/nvim-web-devicons" }, -- Optional
-    --},
+    {
+        "nvim-tree/nvim-tree.lua",
+        lazy = false,
+        config = require(config_path .. "tree"),
+        --dependencies = { "nvim-tree/nvim-web-devicons" }, -- Optional (NOTE: Not supported in Alacritty?)
+    },
 
     -- Fugutive
     {

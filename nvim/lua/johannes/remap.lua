@@ -1,8 +1,5 @@
--- Set the leader key to the spacebar
-vim.g.mapleader = " "
-
 -- Shortcut for netrw
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+--vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Move the selected text
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
