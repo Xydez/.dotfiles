@@ -1,7 +1,22 @@
 return function()
     require("nvim-treesitter").setup({
         -- A list of parser names, or "all"
-        ensure_installed = { "vim", "vimdoc", "query", "c", "lua", "rust" },
+        ensure_installed = {
+            "c",
+            "css",
+            "fish",
+            "graphql",
+            "html",
+            "json",
+            "lua",
+            "rust",
+            "tsx",
+            "toml",
+            "vim",
+            "vimdoc",
+            "query",
+            "yaml",
+        },
 
         sync_install = false,
         auto_install = true,
@@ -11,6 +26,11 @@ return function()
             enable = true,
 
             additional_vim_regex_highlighting = false,
+        },
+
+        indent = {
+            enable = true,
+            disable = {},
         },
 
         -- See https://github.com/nvim-treesitter/nvim-treesitter-textobjects

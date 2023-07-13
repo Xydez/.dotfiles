@@ -68,6 +68,10 @@ return function()
 
     require("nvim-tree").setup({
         on_attach = on_attach,
+        view = {
+            number = true,
+            relativenumber = true,
+        },
         renderer = {
             icons = {
                 show = {
@@ -82,8 +86,8 @@ return function()
                     symlink = "S",
                     modified = "M",
                     folder = {
-                        default = "˃", -- 
-                        open = "⌄", -- ˅
+                        default = "+",
+                        open = "-",
                     },
                 },
             },
