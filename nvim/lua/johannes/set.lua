@@ -17,3 +17,11 @@ vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 --vim.opt.colorcolumn = "80"
 
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+vim.api.nvim_create_autocmd({"BufEnter"}, {
+    pattern = {"*"},
+    command = "normal zR",
+})
+

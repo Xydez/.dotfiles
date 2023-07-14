@@ -5,5 +5,7 @@ return function()
     --vim.keymap.set("n", "<C-p>", builtin.git_files, {})
     --vim.keymap.set("n", "<leader>pp", builtin.grep_string, {})
     vim.keymap.set("n", "<leader>ps", builtin.live_grep, {})
+
+    vim.keymap.set("n", "<leader>d", builtin.diagnostics, {})
 end
 
