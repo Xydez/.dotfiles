@@ -1,6 +1,7 @@
 local config_path = "johannes.config."
 
 return {
+    -- horizontransparent (theme)
     {
         "Xydez/horizontransparent.nvim",
         name = "horizontransparent",
@@ -11,29 +12,30 @@ return {
         end,
     },
 
-    -- TODO: null-ls
-
-    -- Treesitter
+    -- treesitter
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = require(config_path .. "treesitter"),
     },
 
+    -- playground
     "nvim-treesitter/playground",
 
+    -- treesitter-textobjects
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
     },
 
+    -- autopairs
     {
         "windwp/nvim-autopairs",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         config = require(config_path .. "autopairs"),
     },
 
-    -- Telescope
+    -- telescope
     {
         "nvim-telescope/telescope.nvim",
         version = "0.1.2",
@@ -41,27 +43,27 @@ return {
         config = require(config_path .. "telescope"),
     },
 
-    -- Harpoon
+    -- harpoon
     {
         "ThePrimeagen/harpoon",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = require(config_path .. "harpoon"),
     },
 
-    -- Undotree
+    -- undotree
     {
         "mbbill/undotree",
         config = require(config_path .. "undotree"),
     },
 
-    -- Hop
+    -- top
     {
         "phaazon/hop.nvim",
         version = "2.0.3",
         config = require(config_path .. "hop"),
     },
 
-    -- nvim-tree
+    -- tree
     {
         "nvim-tree/nvim-tree.lua",
         lazy = false,
@@ -69,10 +71,16 @@ return {
         --dependencies = { "nvim-tree/nvim-web-devicons" }, -- Optional (NOTE: Not supported in Alacritty?)
     },
 
-    -- Fugutive
+    -- fugutive
     {
         "tpope/vim-fugitive",
         config = require(config_path .. "fugitive"),
+    },
+
+    -- gitsigns
+    {
+        "lewis6991/gitsigns.nvim",
+        config = require(config_path .. "gitsigns"),
     },
 
     -- LSP
