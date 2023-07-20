@@ -7,6 +7,8 @@ if status is-interactive
     abbr --add gp 'git push'
     abbr --add gs 'git status'
     abbr --add gst 'git stash'
+    abbr --add gsts 'git stash --staged'
+    abbr --add gstu 'git stash --keep-index'
     abbr --add gu 'git restore --staged'
 
     export EDITOR=nvim

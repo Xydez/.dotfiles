@@ -44,8 +44,8 @@ return function()
                 keymaps = {
                     ["af"] = "@function.outer",
                     ["if"] = "@function.inner",
-                    ["ac"] = "@class.outer",
-                    ["ic"] = "@class.inner",
+                    ["ac"] = "@call.outer",
+                    ["ic"] = "@call.inner",
                     ["aa"] = "@parameter.outer",
                     ["ia"] = "@parameter.inner",
                 },

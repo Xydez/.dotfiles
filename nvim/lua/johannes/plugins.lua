@@ -9,6 +9,10 @@ return {
         priority = 1000,
         config = function()
             vim.cmd.colorscheme("horizontransparent")
+
+            --vim.api.nvim_set_hl(0, "TabLineFill", { ctermbg = "None" })
+            --vim.api.nvim_set_hl(0, "TabLine",     { ctermbg = "None", ctermfg = "Gray" })
+            --vim.api.nvim_set_hl(0, "TabLineSel",  { ctermbg = "Blue", ctermfg = "White" })
         end,
     },
 
@@ -20,7 +24,10 @@ return {
     },
 
     -- playground
-    "nvim-treesitter/playground",
+    {
+        "nvim-treesitter/playground",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+    },
 
     -- treesitter-textobjects
     {
@@ -83,7 +90,7 @@ return {
         config = require(config_path .. "gitsigns"),
     },
 
-    -- LSP
+    -- lsp
     {
         "VonHeikemen/lsp-zero.nvim",
         branch = "v2.x",

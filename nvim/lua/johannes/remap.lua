@@ -16,3 +16,10 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<leader>o", "A,<Esc>o")
 vim.keymap.set("n", "<leader>O", "A,<Esc>O")
 
+-- Tab shortcuts
+vim.keymap.set("n", "<leader>tn", ":tabnew<CR>")
+vim.keymap.set("n", "<leader>tm", ":tabmove")
+vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
+
+vim.keymap.set("n", "+", "`")
+
