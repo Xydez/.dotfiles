@@ -1,0 +1,42 @@
+return {
+    -- horizontransparent (theme)
+    {
+        "Xydez/horizontransparent.nvim",
+        name = "horizontransparent",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd.colorscheme("horizontransparent")
+
+            --vim.api.nvim_set_hl(0, "TabLineFill", { ctermbg = "None" })
+            --vim.api.nvim_set_hl(0, "TabLine",     { ctermbg = "None", ctermfg = "Gray" })
+            --vim.api.nvim_set_hl(0, "TabLineSel",  { ctermbg = "Blue", ctermfg = "White" })
+        end,
+    },
+
+    -- harpoon
+    --{
+    --    "ThePrimeagen/harpoon",
+    --    dependencies = { "nvim-lua/plenary.nvim" },
+    --    config = function()
+    --        local mark = require("harpoon.mark")
+    --        local ui = require("harpoon.ui")
+
+    --        vim.keymap.set("n", "<leader>a", mark.add_file)
+    --        vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+
+    --        vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
+    --        vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
+    --        vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
+    --        vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
+    --    end,
+    --},
+
+    -- undotree
+    --{
+    --    "mbbill/undotree",
+    --    config = function()
+    --        vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+    --    end
+    --},
+}

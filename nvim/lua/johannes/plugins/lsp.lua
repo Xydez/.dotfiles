@@ -1,16 +1,6 @@
--- Setup language servers
-local function lsp_setup(lsp)
+local function lsp_zero_config()
+    local lsp = require("lsp-zero").preset()
     local lsp_config = require("lspconfig")
-
-    lsp_config.lua_ls.setup(lsp.nvim_lua_ls())
-    lsp_config.tsserver.setup({
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-        cmd = { "typescript-language-server", "--stdio" },
-    })
-end
-
-return function()
-    local lsp = require("lsp-zero").preset({})
 
     lsp.ensure_installed({
         "tsserver",
@@ -53,7 +43,11 @@ return function()
         --vim.keymap.set("n", "<leader>vf", function() vim.lsp.foldmethod() end, opts)
     end)
 
-    lsp_setup(lsp)
+    lsp_config.lua_ls.setup(lsp.nvim_lua_ls())
+    lsp_config.tsserver.setup({
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+        cmd = { "typescript-language-server", "--stdio" },
+    })
 
     lsp.setup()
 
@@ -62,3 +56,25 @@ return function()
     })
 end
 
+return {
+    -- lsp-zero
+    {
+        "VonHeikemen/lsp-zero.nvim",
+        branch = "v2.x",
+        dependencies = {
+            -- LSP Support
+            "neovim/nvim-lspconfig",                -- Required
+            {                                       -- Optional
+                "williamboman/mason.nvim",
+                build = ":MasonUpdate",
+            },
+            "williamboman/mason-lspconfig.nvim",    -- Optional
+
+            -- Autocompletion
+            "hrsh7th/nvim-cmp",                     -- Required
+            "hrsh7th/cmp-nvim-lsp",                 -- Required
+            "L3MON4D3/LuaSnip",                     -- Required
+        },
+        config = lsp_zero_config,
+    },
+}
