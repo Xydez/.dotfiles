@@ -1,5 +1,3 @@
-local config_path = "johannes.config."
-
 local treesitter_opts = {
     -- A list of parser names, or "all"
     ensure_installed = {
