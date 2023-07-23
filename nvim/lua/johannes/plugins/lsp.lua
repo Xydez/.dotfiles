@@ -36,7 +36,7 @@ local function lsp_zero_config()
         --vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
         --vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
         vim.keymap.set("n", "<leader>a", function() vim.lsp.buf.code_action() end, opts)
-        vim.keymap.set("n", "<leader>rf", function() vim.lsp.buf.references() end, opts)
+        vim.keymap.set("n", "<leader>vr", function() require("telescope.builtin").lsp_references() end, opts)
         vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
         vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 
@@ -48,6 +48,7 @@ local function lsp_zero_config()
         filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
         cmd = { "typescript-language-server", "--stdio" },
     })
+    lsp_config.rust_analyzer.setup({})
 
     lsp.setup()
 

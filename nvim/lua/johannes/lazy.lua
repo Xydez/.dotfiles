@@ -17,8 +17,8 @@ vim.opt.runtimepath:prepend(vim.env.LAZY or lazypath)
 -- Setup `lazy`
 require("lazy").setup("johannes.plugins", {
     defaults = {
-        --lazy = false,
-        version = false
+        lazy = false,
+        --version = false
     }
     -- install = { colorscheme = { "tokyonight" } },
     -- checker = { enabled = true },

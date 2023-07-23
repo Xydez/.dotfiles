@@ -1,19 +1,4 @@
 return {
-    -- horizontransparent (theme)
-    {
-        "Xydez/horizontransparent.nvim",
-        name = "horizontransparent",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.cmd.colorscheme("horizontransparent")
-
-            --vim.api.nvim_set_hl(0, "TabLineFill", { ctermbg = "None" })
-            --vim.api.nvim_set_hl(0, "TabLine",     { ctermbg = "None", ctermfg = "Gray" })
-            --vim.api.nvim_set_hl(0, "TabLineSel",  { ctermbg = "Blue", ctermfg = "White" })
-        end,
-    },
-
     -- harpoon
     --{
     --    "ThePrimeagen/harpoon",
