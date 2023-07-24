@@ -13,6 +13,15 @@ return {
     --    },
     --},
 
+    -- NeoColumn.nvim
+    {
+        "ecthelionvi/NeoColumn.nvim",
+        event = "BufEnter",
+        opts = {
+            always_on = true,
+        },
+    },
+
     -- gitsigns
     {
         "lewis6991/gitsigns.nvim",

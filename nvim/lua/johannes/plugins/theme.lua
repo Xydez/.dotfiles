@@ -49,8 +49,8 @@ local themes = {
                     }
                 }
             },
-            overrides = function() -- colors
-                --local theme = colors.theme
+            overrides = function(config)
+                -- See: https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/themes.lua
 
                 return {
                     NormalFloat = { bg = "none" },
@@ -59,19 +59,21 @@ local themes = {
 
                     CursorLine = { bg = "none" },
                     CursorLineNr = { bg = "none" },
-                    ColorColumn = { bg = "none" },
+                    --ColorColumn = { bg = config.theme.ui.bg_p1 },
 
                     TelescopeBorder = { bg = "none" },
+
+                    EndOfBuffer = { fg = config.theme.ui.nontext },
 
                     -- Save an hlgroup with dark background and dimmed foreground
                     -- so that you can use it where your still want darker windows.
                     -- E.g.: autocmd TermOpen * setlocal winhighlight=Normal:NormalDark
-                    --NormalDark = { fg = theme.ui.fg_dim, bg = "none" },
+                    --NormalDark = { fg = config.theme.ui.fg_dim, bg = "none" },
 
                     -- Popular plugins that open floats will link to NormalFloat by default;
                     -- set their background accordingly if you wish to keep them dark and borderless
-                    --LazyNormal = { fg = theme.ui.fg_dim, bg = "none" },
-                    --MasonNormal = { fg = theme.ui.fg_dim, bg = "none" },
+                    --LazyNormal = { fg = config.theme.ui.fg_dim, bg = "none" },
+                    --MasonNormal = { fg = config.theme.ui.fg_dim, bg = "none" },
                 }
             end
         },
