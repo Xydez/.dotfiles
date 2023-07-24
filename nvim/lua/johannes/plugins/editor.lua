@@ -19,6 +19,7 @@ return {
         event = "BufEnter",
         opts = {
             always_on = true,
+            NeoColumn = "100",
         },
     },
 
