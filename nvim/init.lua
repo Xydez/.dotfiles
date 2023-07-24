@@ -1,5 +1,5 @@
 require("johannes.global")
-require("johannes.set")
+require("johannes.opt")
 require("johannes.remap")
 require("johannes.lazy")
 

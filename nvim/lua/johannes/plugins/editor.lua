@@ -14,5 +14,8 @@ return {
     --},
 
     -- gitsigns
-    "lewis6991/gitsigns.nvim",
+    {
+        "lewis6991/gitsigns.nvim",
+        event = "BufEnter",
+    },
 }
