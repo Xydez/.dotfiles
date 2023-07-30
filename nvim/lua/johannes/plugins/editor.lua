@@ -23,9 +23,30 @@ return {
         },
     },
 
-    -- gitsigns
+    -- gitsigns.nvim
     {
         "lewis6991/gitsigns.nvim",
         event = "BufEnter",
+    },
+
+    -- Comment.nvim
+    {
+        "numToStr/Comment.nvim",
+        event = "BufEnter",
+        opts = {
+            ignore = "^$",
+            toggler = {
+                line = nil,
+                block = nil,
+            },
+            opleader = {
+                line = "<leader>cl",
+                block = "<leader>cb",
+            },
+            mappings = {
+                basic = true,
+                extra = false,
+            },
+        },
     },
 }
