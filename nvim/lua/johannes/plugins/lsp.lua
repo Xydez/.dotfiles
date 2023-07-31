@@ -107,6 +107,7 @@ return {
         config = lsp_zero_config,
     },
 
+    -- rust-tools.nvim
     {
         "simrat39/rust-tools.nvim",
         dependencies = {
@@ -114,5 +115,20 @@ return {
         },
         config = function()
         end,
+    },
+
+    -- fidget.nvim
+    {
+        "j-hui/fidget.nvim",
+        tag = "legacy",
+        event = "LspAttach",
+        opts = {
+            text = {
+                spinner = "dots",
+            },
+            window = {
+                blend = 0,
+            },
+        },
     },
 }
