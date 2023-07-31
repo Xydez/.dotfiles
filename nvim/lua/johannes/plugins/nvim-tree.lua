@@ -11,11 +11,11 @@ return {
             hijack_cursor = true,
             hijack_unnamed_buffer_when_opening = true,
             respect_buf_cwd = true,
-            actions = {
-                open_file = {
-                    quit_on_open = true,
-                },
-            },
+            --actions = {
+            --    open_file = {
+            --        quit_on_open = true,
+            --    },
+            --},
             view = {
                 number = true,
                 relativenumber = true,

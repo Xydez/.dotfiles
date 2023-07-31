@@ -10,6 +10,10 @@ local function diagnostics()
     require("telescope.builtin").diagnostics()
 end
 
+local function buffers()
+    require("telescope.builtin").buffers()
+end
+
 return {
     -- telescope
     {
@@ -22,14 +26,15 @@ return {
             --{ "<leader>pp", builtin.grep_string },
             { "<leader>ps", live_grep },
             { "<leader>pd", diagnostics },
+            { "<leader>pb", buffers },
         },
     },
 
     -- vim-fugutive
-    {
-        "tpope/vim-fugitive",
-        keys = {
-            { "<leader>gs", vim.cmd.Git, desc = "Open Git view" }
-        },
-    },
+    --{
+    --    "tpope/vim-fugitive",
+    --    keys = {
+    --        { "<leader>gs", vim.cmd.Git, desc = "Open Git view" }
+    --    },
+    --},
 }

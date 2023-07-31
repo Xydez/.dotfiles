@@ -66,6 +66,10 @@ local themes = {
                     StatusLine = { bg = "none" },
                     StatusLineNC = { bg = "none" },
 
+                    TabLine = { bg = "none" },
+                    TabLineFill = { bg = "none" },
+                    TabLineSel = { bg = "none" },
+
                     EndOfBuffer = { fg = config.theme.ui.nontext },
 
                     -- Save an hlgroup with dark background and dimmed foreground
