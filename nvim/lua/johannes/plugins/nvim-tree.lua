@@ -19,7 +19,7 @@ return {
             view = {
                 number = true,
                 relativenumber = true,
-                side = "right",
+                side = "left",
                 width = 50,
                 centralize_selection = true,
             },
@@ -39,15 +39,6 @@ return {
                         git = false,
                         modified = false,
                     },
-                    --glyphs = {
-                    --    default = "-",
-                    --    symlink = "S",
-                    --    modified = "M",
-                    --    folder = {
-                    --        default = "+",
-                    --        open = "-",
-                    --    },
-                    --},
                 },
             },
             tab = {
@@ -57,14 +48,5 @@ return {
                 },
             },
         },
-        config = function(_, opts)
-            require("nvim-tree").setup(opts)
-
-            vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = function(_) -- data
-                local api = require("nvim-tree.api")
-
-                api.tree.open()
-            end})
-        end,
     },
 }

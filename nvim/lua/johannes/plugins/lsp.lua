@@ -14,7 +14,7 @@ local function lsp_zero_config()
         ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
         ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
         ["<C-s>"] = cmp.mapping.confirm({ select = true }),
-        ["<C-Space>"] = cmp.mapping.complete()
+        ["<C-space>"] = cmp.mapping.complete()
     })
 
     lsp.set_preferences({
@@ -32,7 +32,7 @@ local function lsp_zero_config()
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
         vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-        vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+        vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float(nil, { focusable = false }) end, opts)
         --vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
         --vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
         vim.keymap.set("n", "<leader>a", function() vim.lsp.buf.code_action() end, opts)
@@ -48,12 +48,40 @@ local function lsp_zero_config()
         filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
         cmd = { "typescript-language-server", "--stdio" },
     })
-    lsp_config.rust_analyzer.setup({})
+    --lsp_config.rust_analyzer.setup({})
 
     lsp.setup()
 
+    require("rust-tools").setup({
+        server = lsp.build_options("rust_analyzer", {})
+    })
+
     vim.diagnostic.config({
-        virtual_text = true
+        virtual_text = false,
+
+        underline = true,
+        float = {
+            -- See https://neovim.io/doc/user/api.html#api-win_config
+            border = "rounded",
+            source = "always",
+        },
+    })
+
+    -- Show diagnostic on hover
+    --vim.api.nvim_set_option("updatetime", 300) -- set updatetime for CursorHold
+    --vim.api.nvim_create_autocmd("CursorHold", {
+    --    pattern = "*",
+    --    callback = function()
+    --        vim.diagnostic.open_float(nil, { focusable = false })
+    --    end,
+    --})
+
+    -- Format on save
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*.rs",
+        callback = function()
+            vim.lsp.buf.format({ async = true })
+        end,
     })
 end
 
@@ -77,5 +105,14 @@ return {
             "L3MON4D3/LuaSnip",                     -- Required
         },
         config = lsp_zero_config,
+    },
+
+    {
+        "simrat39/rust-tools.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+        config = function()
+        end,
     },
 }

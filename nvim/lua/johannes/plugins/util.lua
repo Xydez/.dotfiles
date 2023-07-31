@@ -18,10 +18,10 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         keys = {
             { "<leader>pf", find_files },
-            --{ "<C-p>", builtin.git_files },
+            --{ "<leader>pg", builtin.git_files },
             --{ "<leader>pp", builtin.grep_string },
             { "<leader>ps", live_grep },
-            { "<leader>d", diagnostics },
+            { "<leader>pd", diagnostics },
         },
     },
 
