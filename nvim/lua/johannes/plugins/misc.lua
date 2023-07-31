@@ -24,4 +24,15 @@ return {
     --        vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
     --    end
     --},
+
+    -- lualine.nvim
+    --{
+    --    "nvim-lualine/lualine.nvim",
+    --    opts = {
+    --        options = {
+    --            icons_enabled = false,
+    --            theme = "jellybeans", -- horizon
+    --        },
+    --    },
+    --},
 }

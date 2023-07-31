@@ -22,6 +22,7 @@ local themes = {
     catppuccin = {
         "catppuccin/nvim",
         name = "catppuccin",
+        priority = 1000,
         opts = {
             transparent_background = false,
             integration = {
@@ -38,6 +39,7 @@ local themes = {
     kanagawa = {
         "rebelot/kanagawa.nvim",
         name = "kanagawa",
+        priority = 1000,
         opts = {
             transparent = true,
             colors = {
@@ -59,9 +61,10 @@ local themes = {
 
                     CursorLine = { bg = "none" },
                     CursorLineNr = { bg = "none" },
-                    --ColorColumn = { bg = config.theme.ui.bg_p1 },
 
                     TelescopeBorder = { bg = "none" },
+                    StatusLine = { bg = "none" },
+                    StatusLineNC = { bg = "none" },
 
                     EndOfBuffer = { fg = config.theme.ui.nontext },
 
