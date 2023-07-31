@@ -1,3 +1,4 @@
+require("johannes.autocmd")
 require("johannes.global")
 require("johannes.opt")
 require("johannes.remap")

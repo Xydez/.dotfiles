@@ -1,6 +1,7 @@
 local function lsp_zero_config()
     local lsp = require("lsp-zero").preset()
-    local lsp_config = require("lspconfig")
+
+    require("neodev").setup({})
 
     lsp.ensure_installed({
         "tsserver",
@@ -42,6 +43,8 @@ local function lsp_zero_config()
 
         --vim.keymap.set("n", "<leader>vf", function() vim.lsp.foldmethod() end, opts)
     end)
+
+    local lsp_config = require("lspconfig")
 
     lsp_config.lua_ls.setup(lsp.nvim_lua_ls())
     lsp_config.tsserver.setup({
@@ -103,9 +106,13 @@ return {
             "hrsh7th/nvim-cmp",                     -- Required
             "hrsh7th/cmp-nvim-lsp",                 -- Required
             "L3MON4D3/LuaSnip",                     -- Required
+
+            -- neodev.nvim
+            "folke/neodev.nvim",
         },
         config = lsp_zero_config,
     },
+
 
     -- rust-tools.nvim
     {
