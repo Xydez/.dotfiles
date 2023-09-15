@@ -19,7 +19,7 @@ return {
         event = "BufEnter",
         opts = {
             always_on = true,
-            NeoColumn = "100",
+            NeoColumn = "120",
         },
     },
 
@@ -56,5 +56,10 @@ return {
         "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = true,
-    }
+    },
+
+    -- sleuth.vim
+    {
+        "tpope/vim-sleuth",
+    },
 }
