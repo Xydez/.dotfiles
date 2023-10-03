@@ -13,8 +13,18 @@ if status is-interactive
 
     export EDITOR=nvim
 
-    if not set -q TMUX
-        exec tmux
+    # if not set -q TMUX
+    #     exec tmux
+    # end
+end
+
+# Start Hyprland at login
+if status is-login
+    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+        exec Hyprland
     end
 end
 
+
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+set -gx PATH $HOME/.cabal/bin $PATH /home/johannes/.ghcup/bin # ghcup-env

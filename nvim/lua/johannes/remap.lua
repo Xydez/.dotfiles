@@ -22,6 +22,10 @@ vim.keymap.set("n", "<leader>tn", ":tabnew<CR>")
 vim.keymap.set("n", "<leader>tm", ":tabmove")
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
 
+for i = 1, 9, 1 do
+    vim.keymap.set("n", "<leader>" .. i, i .. "gt")
+end
+
 -- Window shortcuts
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")

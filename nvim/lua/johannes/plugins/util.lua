@@ -31,10 +31,10 @@ return {
     },
 
     -- vim-fugutive
-    --{
-    --    "tpope/vim-fugitive",
-    --    keys = {
-    --        { "<leader>gs", vim.cmd.Git, desc = "Open Git view" }
-    --    },
-    --},
+    {
+       "tpope/vim-fugitive",
+       keys = {
+           { "<leader>gs", vim.cmd.Git, desc = "Open Git view" }
+       },
+    },
 }

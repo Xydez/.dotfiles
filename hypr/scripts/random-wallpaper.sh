@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WALLPAPER_DIR=~/Wallpapers
+WALLPAPER_DIR=~/Wallpapers/Anime
 
 if [ -d "$WALLPAPER_DIR" ]; then
     swww img $(find "$WALLPAPER_DIR" | sort -R | tail -1)
