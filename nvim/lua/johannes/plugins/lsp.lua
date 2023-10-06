@@ -15,7 +15,7 @@ local function lsp_zero_config()
         ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
         ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
         ["<C-s>"] = cmp.mapping.confirm({ select = true }),
-        ["<C-space>"] = cmp.mapping.complete()
+        -- ["<C-space>"] = cmp.mapping.complete(),
     })
 
     lsp.set_preferences({

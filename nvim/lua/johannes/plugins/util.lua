@@ -33,8 +33,10 @@ return {
     -- vim-fugutive
     {
        "tpope/vim-fugitive",
-       keys = {
-           { "<leader>gs", vim.cmd.Git, desc = "Open Git view" }
-       },
+        lazy = false, -- TODO: Use correct events / commands or something
+        keys = {
+            { "<leader>gs", vim.cmd.Git, desc = "Open Git view" },
+            { "<leader>gb", function() vim.cmd("Git blame") end, desc = "Open Git blame" }
+        },
     },
 }
