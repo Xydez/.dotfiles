@@ -43,8 +43,10 @@ local treesitter_opts = {
             keymaps = {
                 ["a="] = "@assignment.outer",
                 ["i="] = "@assignment.inner",
-                ["l="] = "@assignment.lhs",
-                ["r="] = "@assignment.rhs",
+
+                -- TODO: These two are kind of wack
+                ["al"] = "@assignment.lhs",
+                ["ar"] = "@assignment.rhs",
 
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
@@ -55,16 +57,15 @@ local treesitter_opts = {
             },
         },
     },
-
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
-            scope_incremental = false,
-            node_decremental = "<bs>"
-        },
-    }
+    -- incremental_selection = {
+    --     enable = false,
+    --     keymaps = {
+    --         init_selection = "<C-space>",
+    --         node_incremental = "<C-space>",
+    --         scope_incremental = false,
+    --         node_decremental = "<bs>"
+    --     },
+    -- }
 }
 
 return {

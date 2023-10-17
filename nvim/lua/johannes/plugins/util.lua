@@ -20,6 +20,20 @@ return {
         "nvim-telescope/telescope.nvim",
         version = "0.1.2",
         dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {
+            defaults = {
+                layout_strategy = "vertical",
+                layout_config = {
+                  vertical = {
+                    width = function(_, max_columns)
+                        return max_columns - 8
+                    end,
+                    -- prompt_position = "top",
+                    -- mirror = true,
+                  },
+                },
+            },
+        },
         keys = {
             { "<leader>pf", find_files },
             --{ "<leader>pg", builtin.git_files },
