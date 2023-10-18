@@ -17,3 +17,15 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 vim.opt.completeopt = "menuone,noselect"
+
+-- Allow editing binary files without mangling to UTF-8
+vim.opt.binary = true
+vim.opt.display:append("uhex") -- Show invalid unicode characters as hex
+
+vim.opt.signcolumn = "number"
+
+vim.opt.list = true -- Show tabs, line-breaks, trailing spaces, end of line
+vim.opt.listchars = { eol = "¬", nbsp = "¬" , tab = "▸ ", trail = "·" , precedes = "«", extends = "»" }
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true

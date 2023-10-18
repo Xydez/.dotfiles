@@ -22,6 +22,7 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {
             defaults = {
+                path_display = { "smart" }, -- smart, shorten
                 layout_strategy = "vertical",
                 layout_config = {
                   vertical = {

@@ -57,6 +57,10 @@ local function lsp_zero_config()
         filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
         cmd = { "typescript-language-server", "--stdio" },
     })
+    lsp_config.psalm.setup({
+        cmd = {"x", "psalm", "--language-server"},
+        flags = { debounce_text_changes = 150 },
+    })
     --lsp_config.rust_analyzer.setup({})
 
     lsp.setup()
@@ -146,13 +150,13 @@ return {
         },
     },
 
-    {
-        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-        dependencies = {
-            "neovim/nvim-lspconfig",
-        },
-        config = function()
-            require("lsp_lines").setup()
-        end,
-    }
+    -- {
+    --     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    --     dependencies = {
+    --         "neovim/nvim-lspconfig",
+    --     },
+    --     config = function()
+    --         require("lsp_lines").setup()
+    --     end,
+    -- },
 }
