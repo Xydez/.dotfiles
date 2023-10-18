@@ -19,6 +19,9 @@ require("lazy").setup("johannes.plugins", {
     defaults = {
         lazy = false,
         --version = false
+        change_detection = {
+            notify = false, -- Annoying, does not work
+        },
     }
     -- install = { colorscheme = { "tokyonight" } },
     -- checker = { enabled = true },

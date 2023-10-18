@@ -1,4 +1,19 @@
 return {
+    -- project
+    {
+        "ahmedkhalf/project.nvim",
+        -- TODO: Telescope integration: dependencies = { "nvim-telescope/telescope.nvim" },
+        opts = {
+            patterns = {
+                ".git",
+                "project.json",
+                "Cargo.toml"
+            }
+        },
+        config = function(opts)
+            require("project_nvim").setup(opts)
+        end,
+    }
     -- harpoon
     --{
     --    "ThePrimeagen/harpoon",

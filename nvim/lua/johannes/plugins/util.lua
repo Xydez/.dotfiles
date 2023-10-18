@@ -1,17 +1,25 @@
-local function find_files()
+local telescope = {}
+
+function telescope.find_files()
     require("telescope.builtin").find_files()
 end
 
-local function live_grep()
+function telescope.live_grep()
     require("telescope.builtin").live_grep()
 end
 
-local function diagnostics()
+function telescope.diagnostics()
     require("telescope.builtin").diagnostics()
 end
 
-local function buffers()
+function telescope.buffers()
     require("telescope.builtin").buffers()
+end
+
+local trouble = {}
+
+function trouble.toggle()
+    require("trouble").toggle()
 end
 
 return {
@@ -36,12 +44,25 @@ return {
             },
         },
         keys = {
-            { "<leader>pf", find_files },
+            { "<leader>pf", telescope.find_files },
             --{ "<leader>pg", builtin.git_files },
             --{ "<leader>pp", builtin.grep_string },
-            { "<leader>ps", live_grep },
-            { "<leader>pd", diagnostics },
-            { "<leader>pb", buffers },
+            { "<leader>ps", telescope.live_grep },
+            -- { "<leader>pd", telescope.diagnostics },
+            { "<leader>pb", telescope.buffers },
+        },
+    },
+
+    -- trouble
+    {
+        "folke/trouble.nvim",
+        -- dependencies = { "nvim-tree/nvim-web-devicons" },
+        keys = {
+            { "<leader>pd", trouble.toggle, desc = "Toggle trouble.nvim" }
+        },
+        opts = {
+            position = "right",
+            icons = false,
         },
     },
 
