@@ -1,0 +1,8 @@
+# See https://wiki.hyprland.org/Configuring/Monitors/
+# NOTE: This is now done using kanshi
+# monitor = eDP-1, 1920@1200@59.950001, auto, 1
+#monitor = DP-3, 5120@1440@59.977001, auto, auto
+# monitor = DP-3, 5120@1440@120, auto, 1
+#monitor=,preferred,auto,auto
+#monitor=,highres,auto,2
+
