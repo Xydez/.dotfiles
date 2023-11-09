@@ -13,6 +13,8 @@ if status is-interactive
     abbr --add gu 'git restore --staged'
 
     export EDITOR=nvim
+    export VISUAL=nvim
+    export PAGER=less
 
     # if not set -q TMUX
     #     exec tmux
@@ -28,7 +30,8 @@ end
 
 bind \cs forward-char
 
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-set -gx PATH $HOME/.cabal/bin $HOME/.ghcup/bin $PATH # ghcup-env
 set -gx PATH $HOME/.cargo/bin $PATH
 set -gx PATH $HOME/.local/bin $PATH
+
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+set -gx PATH $HOME/.cabal/bin $HOME/.ghcup/bin $PATH # ghcup-env
