@@ -82,20 +82,24 @@ return {
     },
 
     -- playground
+    -- TODO: Add command and stuff
     {
         "nvim-treesitter/playground",
+        -- lazy = true,
         dependencies = { "nvim-treesitter/nvim-treesitter" },
     },
 
     -- treesitter-textobjects
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        -- event = { "BufReadPost", "BufNewFile" },
         dependencies = { "nvim-treesitter/nvim-treesitter" },
     },
 
     -- autopairs
     {
         "windwp/nvim-autopairs",
+        event = { "BufReadPost", "BufNewFile" },
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         opts = {
             check_ts = true,

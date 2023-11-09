@@ -7,13 +7,36 @@ return {
             patterns = {
                 ".git",
                 "project.json",
-                "Cargo.toml"
-            }
+                "Cargo.toml",
+            },
         },
         config = function(opts)
             require("project_nvim").setup(opts)
         end,
-    }
+    },
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 500
+        end,
+        opts = {
+            plugins = {
+                registers = false,
+            },
+        },
+    },
+    {
+        "knubie/vim-kitty-navigator",
+        build = (not jit.os:find("Windows"))
+            -- Note: The `-r` parameter is non POSIX, so this will only work on GNU ln
+            and "ln -sr ./pass_keys.py ~/.config/kitty/ && ln -sr ./neighboring_window.py ~/.config/kitty/"
+        or nil,
+        init = function()
+            vim.g.kitty_navigator_password = "Oje7KNfsupxuUcnZJiJOsvwR"
+        end,
+    },
     -- harpoon
     --{
     --    "ThePrimeagen/harpoon",

@@ -31,5 +31,15 @@ vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
+vim.keymap.set("n", "<C-x>", "<C-w>x")
 
+-- vim.keymap.set("n", "<C-H>", "<C-w>H")
+-- vim.keymap.set("n", "<C-J>", "<C-w>J")
+-- vim.keymap.set("n", "<C-K>", "<C-w>K")
+-- vim.keymap.set("n", "<C-L>", "<C-w>L")
+
+-- Go to mark using `+`
 vim.keymap.set("n", "+", "`")
+
+-- Snippets (keybinds are prefixed `<leader>s`)
+vim.keymap.set("n", "<leader>ss", ":r!echo -n $(git config --get user.name) \\<$(git config --get user.email)\\> at $(date '+\\%Y-\\%m-\\%d')<CR><CR>") -- s = signature (username and date)

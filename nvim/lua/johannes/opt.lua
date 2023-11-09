@@ -1,9 +1,9 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 0
+vim.opt.tabstop     = 4 -- Width of tab character
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth  = 4
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
@@ -22,7 +22,7 @@ vim.opt.completeopt = "menuone,noselect"
 vim.opt.binary = true
 vim.opt.display:append("uhex") -- Show invalid unicode characters as hex
 
-vim.opt.signcolumn = "number"
+-- vim.opt.signcolumn = "number"
 
 vim.opt.list = true -- Show tabs, line-breaks, trailing spaces, end of line
 vim.opt.listchars = { nbsp = "¬" , tab = "▸ ", trail = "·" , precedes = "«", extends = "»" }

@@ -1,11 +1,13 @@
 return {
     -- nvim-tree
     -- See: https://github.com/nvim-tree/nvim-tree.lua/blob/master/doc/nvim-tree-lua.txt#L309-L546
+    -- TODO: Fullscreen file selector
+    -- TODO: Remove tab sync
     {
         "nvim-tree/nvim-tree.lua",
         lazy = false,
         keys = {
-            { "<leader>e", vim.cmd.NvimTreeToggle },
+            { "<leader>e", vim.cmd.NvimTreeToggle, desc = "Toggle nvim-tree" },
         },
         opts = {
             hijack_cursor = true,

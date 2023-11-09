@@ -58,10 +58,14 @@ local function lsp_zero_config()
         cmd = { "typescript-language-server", "--stdio" },
     })
     lsp_config.psalm.setup({
-        cmd = {"x", "psalm", "--language-server"},
+        cmd = { "x", "psalm", "--language-server" },
         flags = { debounce_text_changes = 150 },
     })
+    -- lsp_config.phpactor.setup({})
     --lsp_config.rust_analyzer.setup({})
+    lsp_config.hls.setup({
+        filetypes = { "haskell", "lhaskell", "cabal" }
+    })
 
     lsp.setup()
 
@@ -103,16 +107,23 @@ return {
     -- lsp-zero
     {
         "VonHeikemen/lsp-zero.nvim",
+        event = { "BufReadPost", "BufNewFile" },
         branch = "v2.x",
         dependencies = {
             -- LSP Support
             "neovim/nvim-lspconfig",                -- Required
             {                                       -- Optional
-                "williamboman/mason.nvim",
-                build = ":MasonUpdate",
+                "williamboman/mason-lspconfig.nvim",
+                dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
             },
-            "williamboman/mason-lspconfig.nvim",    -- Optional
-
+            {                                       -- Optional
+                "williamboman/mason.nvim",
+                cmd = "Mason",
+                build = ":MasonUpdate",
+                config = function(opts)
+                    require("mason").setup(opts)
+                end,
+            },
             -- Autocompletion
             "hrsh7th/nvim-cmp",                     -- Required
             "hrsh7th/cmp-nvim-lsp",                 -- Required
@@ -124,15 +135,31 @@ return {
         config = lsp_zero_config,
     },
 
+    -- cmp
+    -- { "hrsh7th/nvim-cmp" },
+
+    -- TODO: Add snippets, see https://github.com/L3MON4D3/LuaSnip#add-snippets
+    -- LuaSnip
+    -- Snippets
+    {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = (not jit.os:find("Windows"))
+            -- NOTE: jsregexp is optional, so not a big deal if it fails to build
+            and "make install_jsregexp"
+        or nil,
+        opts = {},
+        keys = {
+            -- TODO: Setup keys
+            { "<C-k>", function() require("luasnip").expand() end, mode = "i" },
+        },
+    },
 
     -- rust-tools.nvim
     {
         "simrat39/rust-tools.nvim",
-        dependencies = {
-            "neovim/nvim-lspconfig",
-        },
-        config = function()
-        end,
+        event = "LspAttach",
+        dependencies = { "neovim/nvim-lspconfig" },
     },
 
     -- fidget.nvim

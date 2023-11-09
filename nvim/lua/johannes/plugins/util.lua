@@ -30,7 +30,7 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {
             defaults = {
-                path_display = { "smart" }, -- smart, shorten
+                -- path_display = { "smart" }, -- smart, shorten
                 layout_strategy = "vertical",
                 layout_config = {
                   vertical = {
@@ -44,18 +44,19 @@ return {
             },
         },
         keys = {
-            { "<leader>pf", telescope.find_files },
+            { "<leader>pf", telescope.find_files, desc = "Toggle Telescope find files" },
             --{ "<leader>pg", builtin.git_files },
             --{ "<leader>pp", builtin.grep_string },
-            { "<leader>ps", telescope.live_grep },
+            { "<leader>ps", telescope.live_grep, desc = "Toggle Telescope live grep" },
             -- { "<leader>pd", telescope.diagnostics },
-            { "<leader>pb", telescope.buffers },
+            { "<leader>pb", telescope.buffers, desc = "Toggle Telescope buffers" },
         },
     },
 
     -- trouble
     {
         "folke/trouble.nvim",
+        cmd = "Trouble",
         -- dependencies = { "nvim-tree/nvim-web-devicons" },
         keys = {
             { "<leader>pd", trouble.toggle, desc = "Toggle trouble.nvim" }
@@ -68,8 +69,8 @@ return {
 
     -- vim-fugutive
     {
-       "tpope/vim-fugitive",
-        lazy = false, -- TODO: Use correct events / commands or something
+        "tpope/vim-fugitive",
+        cmd = "Git",
         keys = {
             { "<leader>gs", vim.cmd.Git, desc = "Open Git view" },
             { "<leader>gb", function() vim.cmd("Git blame") end, desc = "Open Git blame" }
