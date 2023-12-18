@@ -8,6 +8,10 @@ function telescope.live_grep()
     require("telescope.builtin").live_grep()
 end
 
+-- function telescope.live_grep_no_ignore()
+--     require("telescope.builtin").live_grep({ hidden = true, no_ignore = true })
+-- end
+
 function telescope.diagnostics()
     require("telescope.builtin").diagnostics()
 end
@@ -42,12 +46,32 @@ return {
                   },
                 },
             },
+            -- pickers = {
+            --     live_grep_no_ignore = {
+            --         find_command = {
+            --             "rg",
+            --             "--files",
+            --             "--color=never",
+            --             "--line-number",
+            --             "--column",
+            --             "--smart-case",
+            --             "--hidden",
+            --             "--glob",
+            --             "!{**/.git/*, **/node_modules/*, **/target/*}"
+            --         }
+            --     }
+            -- },
         },
         keys = {
             { "<leader>pf", telescope.find_files, desc = "Toggle Telescope find files" },
             --{ "<leader>pg", builtin.git_files },
             --{ "<leader>pp", builtin.grep_string },
             { "<leader>ps", telescope.live_grep, desc = "Toggle Telescope live grep" },
+            -- {
+            --     "<leader>pS",
+            --     telescope.live_grep_no_ignore,
+            --     desc = "Toggle Telescope live grep (including gitignore:d)"
+            -- },
             -- { "<leader>pd", telescope.diagnostics },
             { "<leader>pb", telescope.buffers, desc = "Toggle Telescope buffers" },
         },

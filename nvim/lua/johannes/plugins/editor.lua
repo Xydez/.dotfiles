@@ -22,7 +22,7 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         opts = {
             always_on = true,
-            NeoColumn = "120",
+            NeoColumn = "100",
         },
     },
 
