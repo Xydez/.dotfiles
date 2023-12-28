@@ -5,7 +5,7 @@ function telescope.find_files()
 end
 
 function telescope.live_grep()
-    require("telescope.builtin").live_grep()
+    require("telescope.builtin").live_grep() -- todo: consistent sorting
 end
 
 -- function telescope.live_grep_no_ignore()

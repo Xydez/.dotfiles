@@ -34,6 +34,25 @@ return {
         opts = {},
     },
 
+    -- -- diffview.nvim
+    -- -- Diff extensions
+    -- {
+    --     "sindrets/diffview.nvim",
+    --     event = { "BufReadPost", "BufNewFile" },
+    --     opts = {},
+    -- },
+
+    -- git-conflict.nvim
+    -- Highlight git conflicts
+    {
+        "akinsho/git-conflict.nvim",
+        -- config = true,
+        -- event = { "BufReadPost", "BufNewFile" },
+        opts = {
+            disable_diagnostics = true,
+        },
+    },
+
     -- Comment.nvim
     -- Keybinds for commenting out text
     {
