@@ -41,5 +41,8 @@ vim.keymap.set("n", "<C-x>", "<C-w>x")
 -- Go to mark using `+`
 vim.keymap.set("n", "+", "`")
 
+-- Remove all markings
+vim.keymap.set("n", "T", ":noh<CR>")
+
 -- Snippets (keybinds are prefixed `<leader>s`)
 vim.keymap.set("n", "<leader>ss", ":r!echo -n $(git config --get user.name) \\<$(git config --get user.email)\\> at $(date '+\\%Y-\\%m-\\%d')<CR><CR>") -- s = signature (username and date)

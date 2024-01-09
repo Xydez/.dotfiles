@@ -34,11 +34,12 @@ return {
         opts = {},
     },
 
-    -- -- diffview.nvim
-    -- -- Diff extensions
+    -- diffview.nvim
+    -- Diff extensions / merge tool
     -- {
     --     "sindrets/diffview.nvim",
-    --     event = { "BufReadPost", "BufNewFile" },
+    --     cmd = "DiffviewOpen",
+    --     -- event = { "BufReadPost", "BufNewFile" },
     --     opts = {},
     -- },
 
