@@ -162,6 +162,12 @@ return {
         dependencies = { "neovim/nvim-lspconfig" },
     },
 
+    -- vim-kitty
+    {
+        "fladson/vim-kitty",
+        event = "LspAttach",
+    },
+
     -- fidget.nvim
     {
         "j-hui/fidget.nvim",
