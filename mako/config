@@ -1,0 +1,15 @@
+default-timeout=3000
+border-size=0
+border-radius=1
+font=monospace 10
+
+[urgency=low]
+background-color=#636579
+
+[urgency=normal]
+background-color=#323aa8
+
+[urgency=critical]
+background-color=#a83258
+border-color=#bf616a
+default-timeout=0
