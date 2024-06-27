@@ -31,7 +31,9 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPost", "BufNewFile" },
-        opts = {},
+        opts = {
+            -- signcolumn = false,
+        },
     },
 
     -- diffview.nvim
