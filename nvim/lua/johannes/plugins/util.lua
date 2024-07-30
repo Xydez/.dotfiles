@@ -30,7 +30,7 @@ return {
     -- telescope
     {
         "nvim-telescope/telescope.nvim",
-        version = "0.1.2",
+        version = "0.1.8",
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {
             defaults = {
@@ -100,4 +100,16 @@ return {
             { "<leader>gb", function() vim.cmd("Git blame") end, desc = "Open Git blame" }
         },
     },
+
+    -- diffview
+    {
+        "sindrets/diffview.nvim",
+        cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+        keys = {
+            -- { "<leader>gd", vim.cmd.DiffviewOpen, desc = "Open Git diff" }
+        },
+        opts = {
+            use_icons = false,
+        },
+    }
 }

@@ -21,7 +21,7 @@ return {
             view = {
                 number = true,
                 relativenumber = true,
-                side = "left",
+                side = "right",
                 width = 50,
                 centralize_selection = true,
             },
