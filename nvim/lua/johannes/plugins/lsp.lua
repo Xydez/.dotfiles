@@ -51,6 +51,7 @@ local function lsp_zero_config()
     end)
 
     local lsp_config = require("lspconfig")
+    -- todo: vim.lsp.config("lspconfig")
 
     lsp_config.lua_ls.setup(lsp.nvim_lua_ls())
     lsp_config.tsserver.setup({
@@ -66,6 +67,7 @@ local function lsp_zero_config()
     lsp_config.hls.setup({
         filetypes = { "haskell", "lhaskell", "cabal" }
     })
+    -- todo: vim.lsp.enable("lspconfig")
 
     lsp.setup()
 
@@ -81,7 +83,7 @@ local function lsp_zero_config()
         float = {
             -- See https://neovim.io/doc/user/api.html#api-win_config
             border = "rounded",
-            source = "always",
+            source = true -- "always",
         },
     })
 
