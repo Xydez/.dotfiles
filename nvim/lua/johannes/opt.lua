@@ -2,12 +2,12 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.opt.tabstop     = 4 -- Width of tab character
--- vim.opt.softtabstop = 4
+vim.opt.softtabstop = 4
 vim.opt.shiftwidth  = 4
 vim.opt.expandtab = true
 
--- vim.opt.autoindent = true
--- vim.opt.smartindent = true
+-- vim.opt.autoindent = false
+-- vim.opt.smartindent = false
 
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
@@ -20,8 +20,9 @@ vim.opt.updatetime = 50
 vim.opt.completeopt = "menuone,noselect"
 
 -- Allow editing binary files without mangling to UTF-8
-vim.opt.binary = true
-vim.opt.display:append("uhex") -- Show invalid unicode characters as hex
+-- Note: This is disabled because it sets expandtab to false
+--vim.opt.binary = true
+--vim.opt.display:append("uhex") -- Show invalid unicode characters as hex
 
 -- vim.opt.signcolumn = "number"
 

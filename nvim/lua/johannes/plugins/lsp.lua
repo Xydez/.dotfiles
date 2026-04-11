@@ -1,3 +1,157 @@
+local function lsp_keybinds()
+    local cmp = require("cmp")
+
+    local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
+    cmp.setup({
+        snippet = {
+            expand = function(args)
+                vim.snippet.expand(args.body)
+            end,
+        },
+        mapping = cmp.mapping.preset.insert({
+            ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+            ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+            ["<C-s>"] = cmp.mapping.confirm({ select = true }),
+            -- ["<C-space>"] = cmp.mapping.complete(), -- cmp.mapping.confirm({ select = true })
+        }),
+        sources = {
+            { name = "nvim_lsp" }
+        }
+    })
+
+    vim.diagnostic.config({ signs = false })
+
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+    vim.lsp.config(
+        "*",
+        -- @type vim.lsp.Config
+        {
+            capabilities = capabilities,
+            on_attach = (function(_, bufnr)
+                local opts = { buffer = bufnr, remap = false }
+
+                -- lsp.default_keymaps({buffer = bufnr})
+                vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+                -- vim.keymap.set("n", "gD", function()
+                --     vim.cmd("vsplit")
+                --     vim.lsp.buf.definition({ reuse_win = true })
+                -- end, opts)
+                vim.keymap.set("n", "<leader>tg", "<C-w><C-]><C-w>T", opts)
+                vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+                -- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol(vim.fn.input("Query: ")) end, opts)
+                vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float(nil, { focusable = false }) end, opts)
+                --vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+                --vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+                vim.keymap.set("n", "<leader>a", function() vim.lsp.buf.code_action() end, opts)
+                vim.keymap.set("n", "<leader>vr", function() require("telescope.builtin").lsp_references() end, opts)
+                vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
+                vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+                --vim.keymap.set("n", "<leader>vf", function() vim.lsp.foldmethod() end, opts)
+            end)
+        }
+    )
+
+    vim.g.rustaceanvim = {
+        server = {
+            capabilities = capabilities,
+        },
+    }
+end
+
+local function new_lsp_config()
+    vim.lsp.config("tsserver", {
+        filetypes = { "typescript", "typescriptreact" }, -- "typescript.tsx"
+        cmd = { "typescript-language-server", "--stdio" },
+    })
+
+    -- OOH psalm setup using x
+    --vim.lsp.config("psalm", {
+    --    cmd = { "x", "psalm", "--language-server" },
+    --    flags = { debounce_text_changes = 150 },
+    --})
+
+    vim.lsp.enable({
+        "tsserver",
+        "lua_ls",
+        -- "rust_analyzer",
+    })
+
+    -- lsp_config.phpactor.setup({})
+    --lsp_config.rust_analyzer.setup({})
+
+    lsp_keybinds()
+end
+
+return {
+    {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+            library = {
+                -- See the configuration section for more details
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            },
+        },
+    },
+    {
+        "neovim/nvim-lspconfig",
+        config = new_lsp_config,
+        dependencies = {
+            "hrsh7th/nvim-cmp",
+            "hrsh7th/cmp-nvim-lsp",
+        }
+    },
+
+    -- rust-tools.nvim
+    --{
+    --    "simrat39/rust-tools.nvim",
+    --    event = "LspAttach",
+    --    dependencies = { "neovim/nvim-lspconfig" },
+    --},
+
+    -- rustaceanvim
+    {
+        'mrcjkb/rustaceanvim',
+        version = '^8', -- Recommended
+        lazy = false, -- This plugin is already lazy
+    },
+
+    -- Mason
+    {                                       -- Optional
+        "williamboman/mason.nvim",
+        cmd = "Mason",
+        build = ":MasonUpdate",
+        opts = {},
+    },
+
+    {                                       -- Optional
+        "williamboman/mason-lspconfig.nvim",
+        opts = { automatic_enable = false },
+        dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+    },
+
+    -- Autocompletion
+    {
+        "hrsh7th/nvim-cmp",
+        opts = function(_, opts)
+            opts.sources = opts.sources or {}
+            table.insert(opts.sources, {
+                name = "lazydev",
+                group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+            })
+        end
+    },
+    { "hrsh7th/cmp-nvim-lsp" },
+}
+
+
+
+--[[
 local function lsp_zero_config()
     local lsp = require("lsp-zero").preset()
 
@@ -195,3 +349,4 @@ return {
     --     end,
     -- },
 }
+--]]

@@ -27,8 +27,9 @@ local treesitter_opts = {
         additional_vim_regex_highlighting = false,
     },
 
+    -- Treesitter can control indentation, for example either tabs or spaces, based on file type
     indent = {
-        enable = true,
+        enable = false,
         disable = {},
     },
 

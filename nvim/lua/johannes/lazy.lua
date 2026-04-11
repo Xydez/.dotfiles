@@ -1,7 +1,7 @@
 -- Add `lazy`
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
         "git",
         "clone",
@@ -41,6 +41,11 @@ require("lazy").setup("johannes.plugins", {
               task = "✔",
               lazy = "💤 ",
         },
+    },
+
+    -- disable luarocks to fix warning
+    rocks = {
+        enabled = false,
     },
 })
 

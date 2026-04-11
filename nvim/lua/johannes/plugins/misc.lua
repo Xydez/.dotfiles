@@ -1,19 +1,19 @@
 return {
-    -- project
-    {
-        "ahmedkhalf/project.nvim",
-        -- TODO: Telescope integration: dependencies = { "nvim-telescope/telescope.nvim" },
-        opts = {
-            patterns = {
-                ".git",
-                "project.json",
-                "Cargo.toml",
-            },
-        },
-        config = function(opts)
-            require("project_nvim").setup(opts)
-        end,
-    },
+    -- project; abandoned
+    --{
+    --    "ahmedkhalf/project.nvim",
+    --    -- TODO: Telescope integration: dependencies = { "nvim-telescope/telescope.nvim" },
+    --    opts = {
+    --        patterns = {
+    --            ".git",
+    --            "project.json",
+    --            "Cargo.toml",
+    --        },
+    --    },
+    --    config = function(opts)
+    --        require("project_nvim").setup(opts)
+    --    end,
+    --},
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
@@ -27,16 +27,16 @@ return {
             },
         },
     },
-    {
-        "knubie/vim-kitty-navigator",
-        build = (not jit.os:find("Windows"))
-            -- Note: The `-r` parameter is non POSIX, so this will only work on GNU ln
-            and "ln -sr ./pass_keys.py ~/.config/kitty/ && ln -sr ./neighboring_window.py ~/.config/kitty/"
-        or nil,
-        init = function()
-            vim.g.kitty_navigator_password = "Oje7KNfsupxuUcnZJiJOsvwR"
-        end,
-    },
+    -- {
+    --     "knubie/vim-kitty-navigator",
+    --     build = (not jit.os:find("Windows"))
+    --         -- Note: The `-r` parameter is non POSIX, so this will only work on GNU ln
+    --         and "ln -sr ./pass_keys.py ~/.config/kitty/ && ln -sr ./neighboring_window.py ~/.config/kitty/"
+    --     or nil,
+    --     init = function()
+    --         vim.g.kitty_navigator_password = "Oje7KNfsupxuUcnZJiJOsvwR"
+    --     end,
+    -- },
     -- harpoon
     --{
     --    "ThePrimeagen/harpoon",
@@ -64,13 +64,13 @@ return {
     --},
 
     -- lualine.nvim
-    --{
+    -- {
     --    "nvim-lualine/lualine.nvim",
     --    opts = {
     --        options = {
     --            icons_enabled = false,
-    --            theme = "jellybeans", -- horizon
+    --            theme = "horizon", -- jellybeans/horizon
     --        },
     --    },
-    --},
+    -- },
 }

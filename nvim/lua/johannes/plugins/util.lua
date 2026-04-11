@@ -72,7 +72,7 @@ return {
             --     telescope.live_grep_no_ignore,
             --     desc = "Toggle Telescope live grep (including gitignore:d)"
             -- },
-            -- { "<leader>pd", telescope.diagnostics },
+            { "<leader>pd", telescope.diagnostics },
             { "<leader>pb", telescope.buffers, desc = "Toggle Telescope buffers" },
         },
     },

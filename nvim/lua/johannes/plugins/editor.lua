@@ -48,7 +48,8 @@ return {
     -- git-conflict.nvim
     -- Highlight git conflicts
     {
-        "akinsho/git-conflict.nvim",
+        --"akinsho/git-conflict.nvim",
+        "konradmalik/git-conflict.nvim",
         -- config = true,
         -- event = { "BufReadPost", "BufNewFile" },
         opts = {
@@ -102,13 +103,13 @@ return {
         -- event = { "BufReadPost", "BufNewFile", "BufFilePost" },
     },
 
-    -- colorizer
+    -- colorizer; abandoned
     -- Set the background color of hex color codes
-    {
-        "norcalli/nvim-colorizer.lua",
-        event = { "BufReadPost", "BufNewFile" },
-        opts = {},
-    },
+    --{
+    --    "norcalli/nvim-colorizer.lua",
+    --    event = { "BufReadPost", "BufNewFile" },
+    --    opts = {},
+    --},
 
     -- sleuth.vim
     -- Heuristically set buffer options (tab vs spaces)
