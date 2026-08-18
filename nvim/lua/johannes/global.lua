@@ -28,3 +28,12 @@ vim.g.loaded_netrwFileHandlers = true
 -- Set the leader key to the spacebar
 vim.g.mapleader = " "
 
+-- Neovide specific configuration
+if vim.g.neovide then
+    vim.g.neovide_background_color = "#ffffff00"
+end
+
+-- Nvy specific configuration
+if vim.g.nvy then
+	vim.o.guifont = "Fira Code:h11"
+end

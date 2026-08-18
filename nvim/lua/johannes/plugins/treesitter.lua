@@ -1,100 +1,122 @@
-local treesitter_opts = {
-    -- A list of parser names, or "all"
-    ensure_installed = {
-        "c",
-        "css",
-        "fish",
-        "graphql",
-        "html",
-        "json",
-        "lua",
-        "rust",
-        "tsx",
-        "toml",
-        "vim",
-        "vimdoc",
-        "query",
-        "yaml",
-    },
+local ts_textobjects_keymaps = {
+    ["a="] = "@assignment.outer",
+    ["i="] = "@assignment.inner",
 
-    sync_install = false,
-    auto_install = true,
+    -- TODO: These two are kind of wack
+    ["al"] = "@assignment.lhs",
+    ["ar"] = "@assignment.rhs",
 
-    highlight = {
-        -- `false` will disable the whole extension
-        enable = true,
-
-        additional_vim_regex_highlighting = false,
-    },
-
-    -- Treesitter can control indentation, for example either tabs or spaces, based on file type
-    indent = {
-        enable = false,
-        disable = {},
-    },
-
-    -- See https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-    textobjects = {
-        select = {
-            enable = true,
-
-            -- Automatically jump forward to textobj, similar to targets.vim
-            lookahead = true,
-
-            keymaps = {
-                ["a="] = "@assignment.outer",
-                ["i="] = "@assignment.inner",
-
-                -- TODO: These two are kind of wack
-                ["al"] = "@assignment.lhs",
-                ["ar"] = "@assignment.rhs",
-
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
-                ["ac"] = "@call.outer",
-                ["ic"] = "@call.inner",
-                ["aa"] = "@parameter.outer",
-                ["ia"] = "@parameter.inner",
-            },
-        },
-    },
-    -- incremental_selection = {
-    --     enable = false,
-    --     keymaps = {
-    --         init_selection = "<C-space>",
-    --         node_incremental = "<C-space>",
-    --         scope_incremental = false,
-    --         node_decremental = "<bs>"
-    --     },
-    -- }
+    ["af"] = "@function.outer",
+    ["if"] = "@function.inner",
+    ["ac"] = "@call.outer",
+    ["ic"] = "@call.inner",
+    ["aa"] = "@parameter.outer",
+    ["ia"] = "@parameter.inner",
 }
 
+-- Note: This is a migration from the old format (master branch of nvim-treesitter and nvim-treesitter-textobjects) to the new one (main branch)
+local function setup_keymaps(keymaps)
+    for lhs, capture in pairs(keymaps) do
+        vim.keymap.set({ "x", "o" }, lhs, function()
+            require("nvim-treesitter-textobjects.select").select_textobject(capture, "textobjects")
+        end)
+    end
+end
+
+local ts_textobjects_opts = {
+    select = {
+        enable = true,
+
+        -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true,
+    },
+}
+
+-- Autocommands
+local nvimrc_augroup = vim.api.nvim_create_augroup("nvimrc", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+    -- See: https://github.com/nvim-treesitter/nvim-treesitter/issues/8424#issuecomment-3744851561
+    pattern = {
+        "c",
+        "cmake",
+        "cpp",
+        "css",
+        "fish",
+        "go",
+        "graphql",
+        "html",
+        "java",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "ledger",
+        "lua",
+        "markdown",
+        "python",
+        "query",
+        "rust",
+        "toml",
+        "tsx",
+        "typescript",
+        "typescriptreact",
+        "vim",
+        "vimdoc",
+        "vue",
+        "yaml",
+    },
+    callback = function()
+        vim.treesitter.start()
+    end,
+    group = nvimrc_augroup
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "javascriptreact", "javascript", "vue" },
+    callback = function()
+        -- Experimental!
+        -- Treesitter can manage indentation
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+    group = nvimrc_augroup
+})
+
+-- New keymap format migration
+setup_keymaps(ts_textobjects_keymaps)
+
 return {
-    -- treesitter
+    -- nvim-treesitter (treesitter manager)
     {
         "nvim-treesitter/nvim-treesitter",
+        --branch = "main",
         --version = false,
         build = ":TSUpdate",
-        event = { "BufReadPost", "BufNewFile" },
+        lazy = false,
+        --event = { "BufReadPost", "BufNewFile" },
         opts = treesitter_opts,
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
-        end
+        --config = function(_, opts)
+        --    require("nvim-treesitter.configs").setup(opts)
+        --end
     },
 
     -- playground
     -- TODO: Add command and stuff
-    {
-        "nvim-treesitter/playground",
-        -- lazy = true,
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
-    },
+    --{
+    --    "nvim-treesitter/playground",
+    --    -- lazy = true,
+    --    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    --},
 
     -- treesitter-textobjects
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        --branch = "main",
         -- event = { "BufReadPost", "BufNewFile" },
         dependencies = { "nvim-treesitter/nvim-treesitter" },
+        --init = function()
+        --    vim.g.no_plugin_maps = true
+        --end,
+        opts = ts_textobjects_opts,
     },
 
     -- autopairs
