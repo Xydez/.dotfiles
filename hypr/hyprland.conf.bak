@@ -1,0 +1,327 @@
+ecosystem {
+    no_update_news = true
+    no_donation_nag = true
+}
+
+# See: https://github.com/ChrisTitusTech/hyprland-titus/blob/main/dotconfig/hypr/hyprland.conf
+# TODO: See https://wiki.hyprland.org/hyprland-wiki/pages/Configuring/Advanced-config/
+
+# source ~/.config/hypr/monitor.conf
+
+# Monitor configuration
+# package:kanshi
+#exec-once = kanshi
+# exec-once = ~/.config/hypr/scripts/monitor-config.sh
+
+# Waybar
+# package:waybar
+exec-once = waybar
+
+# RAM usage notification
+exec-once = ~/.config/hypr/scripts/ram-monitor.sh
+
+# Notification daemon
+# package:mako
+exec-once = mako
+
+# Power notifications
+# package:poweralertd
+exec-once = poweralertd
+
+# package:polkit-gnome
+exec-once = /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# Unscale XWayland
+xwayland {
+    force_zero_scaling = true
+}
+
+# toolkit-specific scale
+env = XCURSOR_SIZE,24
+
+# Please use wayland
+
+# GTK Fixes
+env = GDK_BACKEND,wayland,x11,*
+env = GDK_SCALE,1
+#env = GTK_THEME=Adwaita:dark
+
+# QT fixes
+env = QT_QPA_PLATFORM,wayland;xcb
+env = QT_SCALE_FACTOR_ROUNDING_POLICY,RoundPreferFloor
+#env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+#env = QT_AUTO_SCREEN_SCALE_FACTOR,1
+
+# Anki fixes
+# package:anki
+env = ANKI_WAYLAND,1
+env = ANKI_WEBSCALE,0.75
+
+# Miscellaneous fixes
+# Set to x11 if games that provide older versions of SDL cause compatibility issues
+env = SDL_VIDEODRIVER,wayland
+env = CLUTTER_BACKEND,wayland
+
+# IME setup
+
+# `--disable notificationitem` is in order to disable the tray item as the icons is ugly
+# package:fcitx5-im
+exec-once = fcitx5 --disable notificationitem
+
+# NOTE: It seems GTK_IM_MODULE, QT_IM_MODULE and SDL_IM_MODULE should not be set; see
+#       https://forum.endeavouros.com/t/fcitx-wayland-diagnose/47481/2
+env = XMODIFIERS,@im=fcitx
+env = SDL_IM_MODULE,fcitx # Some SDL games
+env = GLFW_IM_MODULE,ibus # In order for kitty to work
+
+# NOTE: These have been moved to .xprofile to only be used in xwayland applications.
+#env = GTK_IM_MODULE,fcitx
+#env = QT_IM_MODULE,fcitx
+
+# Wallpaper
+# package:awww
+exec-once = awww-daemon
+
+# == fix: Mpv gamut bug ==
+#windowrule = content none, match:class mpv
+
+render {
+    #direct_scanout = 0
+
+    #cm_enabled = 0
+    #send_content_type = 0
+    #non_shader_cm = 0
+
+    cm_auto_hdr = 0
+}
+
+misc {
+    #vrr = 0
+}
+# == fix: end ==
+
+# For all categories, see https://wiki.hyprland.org/Configuring/Variables/
+input {
+    kb_layout = se
+    kb_variant =
+    kb_model =
+    kb_options =
+    kb_rules =
+
+    follow_mouse = 1
+
+    touchpad {
+        natural_scroll = false
+    }
+
+    sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+}
+
+general {
+    gaps_in = 5
+    gaps_out = 20
+    border_size = 1
+    col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
+    col.inactive_border = rgba(595959aa)
+
+    layout = dwindle
+}
+
+misc {
+    enable_swallow = true
+    swallow_regex = ^(kitty)$
+
+    disable_hyprland_logo = true
+    disable_splash_rendering = true
+}
+
+decoration {
+    rounding = 0
+
+    blur {
+        enabled = true
+        size = 4
+        passes = 2
+        noise = 0.12
+        #noise = 0
+    }
+
+    #drop_shadow = true
+    #shadow_range = 4
+    #shadow_render_power = 3
+    #col.shadow = rgba(1a1a1aee)
+}
+
+animations {
+    enabled = true
+
+    # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+
+    bezier = myBezier, 0.05, 0.9, 0.1, 1.05
+
+    animation = windows, 1, 7, myBezier
+    animation = windowsOut, 1, 7, default, popin 80%
+    animation = border, 1, 10, default
+    animation = borderangle, 1, 8, default
+    animation = fade, 1, 7, default
+    animation = workspaces, 1, 6, default
+}
+
+dwindle {
+    # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+    preserve_split = true # you probably want this
+    #no_gaps_when_only = false # Fullscreen if there's only one window
+}
+
+master {
+    # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+    #new_is_master = true
+}
+
+# removed setting:
+#gestures {
+#    workspace_swipe = false
+#}
+
+# Example windowrule v1
+# windowrule = float, ^(kitty)$
+# Example windowrule v2
+# windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
+# See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+# ^ basically which workspace programs end up on
+
+# Popup terminal
+#windowrulev2 = float, class:^(kitty-popup)$
+#windowrulev2 = size 75% 40%, class:^(kitty-popup)$
+#windowrulev2 = move 12.5% 10%, class:^(kitty-popup)$
+#windowrulev2 = animation slidevert, class:^(kitty-popup)$
+#windowrulev2 = noblur, class:^(kitty-popup)$
+
+windowrule {
+    name = popup-terminal
+    match:class = ^(kitty-popup)$
+
+    float = on
+    animation = slidevert
+    no_blur = on
+    size = (monitor_w*0.75) (monitor_h*0.4)
+    move = (monitor_w*0.125) (monitor_h*0.1)
+}
+
+# Setup workspaces
+workspace = 1
+workspace = 2
+workspace = 3
+workspace = 4
+workspace = 5
+workspace = 6
+workspace = 7
+workspace = 8
+workspace = 9
+# workspace = 1, monitor:DP-3, default:true
+# workspace = 2, monitor:DP-3
+# workspace = 3, monitor:DP-3
+# workspace = 4, monitor:DP-3
+# workspace = 5, monitor:DP-3
+# workspace = 6, monitor:eDP-1, default:true
+# workspace = 7, monitor:eDP-1
+# workspace = 8, monitor:eDP-1
+# workspace = 9, monitor:eDP-1
+
+# See https://wiki.hyprland.org/Configuring/Keywords/ for more
+# ALT / SUPER
+$mod = SUPER
+#$menu = wofi --show=drun
+# package:aur/tofi
+$menu = tofi-drun --drun-launch=true
+
+bind = $mod, B, exec, pkill -SIGUSR1 waybar
+
+# Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+# Syntax:
+#   bind = <MODS>, <key>, <dispatcher>, <params>
+bind = $mod, RETURN, exec, kitty
+# package:kitty
+bind = $mod, T, exec, kitty --class=kitty-popup # popup terminal
+bind = $mod, D, exec, $menu
+bind = $mod, M, exec, ~/.config/hypr/scripts/random-wallpaper.sh
+bind = $mod SHIFT, M, exec, awww img ~/Wallpapers/blood-moon.png #--transition-duration 0.5
+bind = $mod, Q, killactive,
+bind = $mod SHIFT, Q, forcekillactive
+bind = $mod SHIFT, E, exit,
+#bind = $mod, F, exec, dolphin
+bind = $mod, V, togglefloating,
+#bind = $mod, P, pseudo, # dwindle
+#bind = $mod, J, togglesplit, # dwindle
+bind = $mod, F, fullscreen, 0
+
+# Move focus with mod + arrow keys
+bind = $mod, H, movefocus, l
+bind = $mod, J, movefocus, d
+bind = $mod, K, movefocus, u
+bind = $mod, L, movefocus, r
+
+# Resize with mod + ctrl + arrow keys
+bind = $mod CTRL, H, resizeactive, -20 0
+bind = $mod CTRL, J, resizeactive, 0 20
+bind = $mod CTRL, K, resizeactive, 0 -20
+bind = $mod CTRL, L, resizeactive, 20 0
+
+# Move with mod + shift + arrow keys
+bind = $mod SHIFT, H, movewindow, l
+bind = $mod SHIFT, J, movewindow, d
+bind = $mod SHIFT, K, movewindow, u
+bind = $mod SHIFT, L, movewindow, r
+
+# Switch workspaces with mod + [0-9]
+bind = $mod, 1, workspace, 1
+bind = $mod, 2, workspace, 2
+bind = $mod, 3, workspace, 3
+bind = $mod, 4, workspace, 4
+bind = $mod, 5, workspace, 5
+bind = $mod, 6, workspace, 6
+bind = $mod, 7, workspace, 7
+bind = $mod, 8, workspace, 8
+bind = $mod, 9, workspace, 9
+bind = $mod, 0, workspace, 10
+
+# Move active window to a workspace with mod + SHIFT + [0-9]
+bind = $mod SHIFT, 1, movetoworkspace, 1
+bind = $mod SHIFT, 2, movetoworkspace, 2
+bind = $mod SHIFT, 3, movetoworkspace, 3
+bind = $mod SHIFT, 4, movetoworkspace, 4
+bind = $mod SHIFT, 5, movetoworkspace, 5
+bind = $mod SHIFT, 6, movetoworkspace, 6
+bind = $mod SHIFT, 7, movetoworkspace, 7
+bind = $mod SHIFT, 8, movetoworkspace, 8
+bind = $mod SHIFT, 9, movetoworkspace, 9
+bind = $mod SHIFT, 0, movetoworkspace, 10
+
+# Scroll through existing workspaces with mod + scroll
+bind = $mod, mouse_down, workspace, e+1
+bind = $mod, mouse_up, workspace, e-1
+
+# Move/resize windows with mod + LMB/RMB and dragging
+bindm = $mod, mouse:272, movewindow
+bindm = $mod, mouse:273, resizewindow
+
+# Print-screen select (PrtSc button = `Print`)
+# package:grim package:slurp package:wl-clipboard
+bind = $mod, S, exec, tmpfile=$(mktemp -p /tmp screenshot.XXXXXXXXXX) && grim -g "$(slurp)" "$tmpfile" && wl-copy -t image/png < "$tmpfile"
+
+# Color picker
+# package:hyprpicker package:wl-clipboard
+bind = $mod, P, exec, hyprpicker --autocopy
+
+# Hide waybar
+
+# Brightness
+# package:brightnessctl
+bind = , XF86MonBrightnessUp, exec, brightnessctl -n --exponent=2 set +5% && notify-send -h string:x-canonical-private-synchronous:59404 'Ljusstyrka ökad' "Ljusstyrka satt till $(brightnessctl g)/$(brightnessctl m)"
+bind = , XF86MonBrightnessDown, exec, brightnessctl -n --exponent=2 set 5%- && notify-send -h string:x-canonical-private-synchronous:59404 'Ljusstyrka minskad' "Ljusstyrka satt till $(brightnessctl g)/$(brightnessctl m)"
+
+bind = , XF86AudioRaiseVolume, exec, pulsemixer --change-volume +5 && notify-send -h string:x-canonical-private-synchronous:59404 'Volym ökad' "Volym satt till $(pulsemixer --get-volume)"
+bind = , XF86AudioLowerVolume, exec, pulsemixer --change-volume -5 && notify-send -h string:x-canonical-private-synchronous:59404 'Volym ökad' "Volym satt till $(pulsemixer --get-volume)"
+
+# TODO: Fixa tangentbordsljusstyrka
+# brightnessctl -d asus::kbd_backlight set $(math "($(brightnessctl -d asus::kbd_backlight get) + 1) % 4")
