@@ -111,5 +111,12 @@ return {
         opts = {
             use_icons = false,
         },
-    }
+    },
+
+    -- mini.ai (part of mini.nvim)
+    -- Replacement for nvim-treesitter-textobjects
+    --{
+    --    "nvim-mini/mini.ai",
+    --    version = '*',
+    --},
 }

@@ -44,6 +44,9 @@ vim.keymap.set("n", "+", "`")
 -- Remove all markings - Shift+T; that is, deselect all selected text
 vim.keymap.set("n", "T", ":noh<CR>")
 
+-- Alternative remap because i always forget the keybind
+vim.keymap.set("n", "<leader>ds", ":noh<CR>")
+
 -- Snippets (keybinds are prefixed `<leader>s`)
 -- s = signature (username and date)
 vim.keymap.set("n", "<leader>ss",

@@ -1,6 +1,68 @@
-local function lsp_keybinds()
-    local cmp = require("cmp")
+local function base_on_attach(_, bufnr)
+    local opts = { buffer = bufnr, remap = false }
 
+    -- lsp.default_keymaps({buffer = bufnr})
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    -- vim.keymap.set("n", "gD", function()
+    --     vim.cmd("vsplit")
+    --     vim.lsp.buf.definition({ reuse_win = true })
+    -- end, opts)
+    vim.keymap.set("n", "<leader>tg", "<C-w><C-]><C-w>T", opts)
+    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+    -- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol(vim.fn.input("Query: ")) end, opts)
+    vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float(nil, { focusable = false }) end, opts)
+    --vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+    --vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+    vim.keymap.set("n", "<leader>a", function() vim.lsp.buf.code_action() end, opts)
+    vim.keymap.set("n", "<leader>vr", function() require("telescope.builtin").lsp_references() end, opts)
+    vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
+    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+    --vim.keymap.set("n", "<leader>vf", function() vim.lsp.foldmethod() end, opts)
+end
+
+local function new_lsp_config()
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+    -- LSP CONFIGS --
+    vim.lsp.config("denols", {
+        capabilities = capabilities,
+        on_attach = base_on_attach,
+
+        root_markers = { "deno.json", "deno.jsonc" },
+    })
+
+    vim.lsp.config("ts_ls", {
+        capabilities = capabilities,
+        on_attach = base_on_attach,
+
+        root_markers = { "package.json" },
+        filetypes = { "typescript", "typescriptreact" }, -- "typescript.tsx"
+        single_file_support = false,
+        --cmd = { "typescript-language-server", "--stdio" },
+    })
+
+    vim.lsp.config(
+        "*",
+        -- @type vim.lsp.Config
+        {
+            capabilities = capabilities,
+            on_attach = base_on_attach
+        }
+    )
+
+    -- OOH psalm setup using x
+    --vim.lsp.config("psalm", {
+    --    cmd = { "x", "psalm", "--language-server" },
+    --    flags = { debounce_text_changes = 150 },
+    --})
+
+    -- lsp_config.phpactor.setup({})
+    --lsp_config.rust_analyzer.setup({})
+
+    -- Setup cmp --
+    local cmp = require("cmp")
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
     cmp.setup({
@@ -22,68 +84,21 @@ local function lsp_keybinds()
 
     vim.diagnostic.config({ signs = false })
 
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-    vim.lsp.config(
-        "*",
-        -- @type vim.lsp.Config
-        {
-            capabilities = capabilities,
-            on_attach = (function(_, bufnr)
-                local opts = { buffer = bufnr, remap = false }
-
-                -- lsp.default_keymaps({buffer = bufnr})
-                vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-                -- vim.keymap.set("n", "gD", function()
-                --     vim.cmd("vsplit")
-                --     vim.lsp.buf.definition({ reuse_win = true })
-                -- end, opts)
-                vim.keymap.set("n", "<leader>tg", "<C-w><C-]><C-w>T", opts)
-                vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-                -- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol(vim.fn.input("Query: ")) end, opts)
-                vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float(nil, { focusable = false }) end, opts)
-                --vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-                --vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-                vim.keymap.set("n", "<leader>a", function() vim.lsp.buf.code_action() end, opts)
-                vim.keymap.set("n", "<leader>vr", function() require("telescope.builtin").lsp_references() end, opts)
-                vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
-                vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-
-                --vim.keymap.set("n", "<leader>vf", function() vim.lsp.foldmethod() end, opts)
-            end)
-        }
-    )
-
     vim.g.rustaceanvim = {
         server = {
             capabilities = capabilities,
         },
     }
-end
 
-local function new_lsp_config()
-    vim.lsp.config("tsserver", {
-        filetypes = { "typescript", "typescriptreact" }, -- "typescript.tsx"
-        cmd = { "typescript-language-server", "--stdio" },
-    })
+    vim.lsp.inlay_hint.enable(true)
 
-    -- OOH psalm setup using x
-    --vim.lsp.config("psalm", {
-    --    cmd = { "x", "psalm", "--language-server" },
-    --    flags = { debounce_text_changes = 150 },
-    --})
-
+    -- Enable language servers --
     vim.lsp.enable({
-        "tsserver",
+        "denols",
+        "ts_ls",
         "lua_ls",
         -- "rust_analyzer",
     })
-
-    -- lsp_config.phpactor.setup({})
-    --lsp_config.rust_analyzer.setup({})
-
-    lsp_keybinds()
 end
 
 return {
